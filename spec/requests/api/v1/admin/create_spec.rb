@@ -21,6 +21,7 @@ RSpec.describe "POST /api/v1/admin/articles", type: :request do
              category: "sports",
              premium: false,
              image: image,
+             location: "Sweden",
            } },
            headers: journalist_headers
     end
@@ -55,6 +56,7 @@ RSpec.describe "POST /api/v1/admin/articles", type: :request do
              content: "My content",
              category: "sports",
              premium: true,
+             location: "Sweden",
            } },
            headers: journalist_headers
     end
@@ -73,6 +75,7 @@ RSpec.describe "POST /api/v1/admin/articles", type: :request do
                teaser: "My teaser",
                content: "",
                category: "sports",
+               location: "Sweden",
              },
            },
            headers: journalist_headers
@@ -98,6 +101,7 @@ RSpec.describe "POST /api/v1/admin/articles", type: :request do
              teaser: "My teaser",
              content: "My content",
              category: "sports",
+             location: "Sweden",
            } }, headers: unauthozired_headers
     end
     it "is expected to return unauthozired response status" do
