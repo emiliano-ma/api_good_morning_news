@@ -1,12 +1,12 @@
 RSpec.describe "GET /api/v1/articles", type: :request do
   let!(:swedish_articles) do
     3.times do
-      create(:article, title: "This happend in Sweden", location: "Sweden")
+      create(:article, title: "This happened in Sweden", location: "Sweden")
     end
   end
   let!(:international_articles) do
     5.times do
-      create(:article, title: "This is France", location: "International")
+      create(:article, title: "This happened in the world", location: "International")
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe "GET /api/v1/articles", type: :request do
     end
 
     it "is expected to return a specific article title" do
-      expect(response_json["articles"].first["title"]).to eq "This happend in Sweden"
+      expect(response_json["articles"].first["title"]).to eq "This happened in Sweden"
     end
 
     it "is expected to return articles with location: Sweden" do
@@ -35,7 +35,7 @@ RSpec.describe "GET /api/v1/articles", type: :request do
     end
   end
 
-  describe "successfully location Italy" do
+  describe "successfully returns articles with -location: International- when visitor is not in Sweden " do
     before do
       get "/api/v1/articles",
           params: {
@@ -48,7 +48,7 @@ RSpec.describe "GET /api/v1/articles", type: :request do
     end
 
     it "is expected to return a specific article title" do
-      expect(response_json["articles"].first["title"]).to eq "This is France"
+      expect(response_json["articles"].first["title"]).to eq "This happened in the world"
     end
 
     it "is expected to return articles with location: International" do
