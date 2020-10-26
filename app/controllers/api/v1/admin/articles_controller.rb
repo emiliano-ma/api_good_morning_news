@@ -3,12 +3,8 @@ class Api::V1::Admin::ArticlesController < ApplicationController
   before_action :role_journalist?
 
   def create
-    params_image = params[:article][:image]
     article = current_user.articles.create(article_params)
-    if article.persisted? && params_image.present?
-      DecodeService.attach_image(params_image, article.image)
-      render json: { message: "successfully saved" }
-    elsif article.persisted?
+    if article.persisted? && attach_image(article)
       render json: { message: "successfully saved" }
     else
       error_message(article.errors)
@@ -17,8 +13,15 @@ class Api::V1::Admin::ArticlesController < ApplicationController
 
   private
 
+  def attach_image(article)
+    params_image = params[:article][:image]
+    if params_image.present?
+      DecodeService.attach_image(params_image, article.image)
+    end
+  end
+
   def article_params
-    params.require(:article).permit(:title, :teaser, :content, :category, :premium, :location)
+    params.require(:article).permit(:title, :teaser, :content, :category, :premium)
   end
 
   def role_journalist?
