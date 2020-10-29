@@ -5,6 +5,8 @@ class Api::V1::ArticlesController < ApplicationController
   def index
     articles = if selecting_category
         Article.where(category: params["category"])
+      elsif selected_location? == true
+        Article.where(location: valid_location)
       else
         Article.all
       end
@@ -30,5 +32,17 @@ class Api::V1::ArticlesController < ApplicationController
 
   def selecting_category
     !params["category"].nil?
+  end
+
+  def selected_location?
+    !params["location"].nil?
+  end
+
+  def valid_location
+    if params["location"] == "Sweden"
+      "Sweden"
+    else
+      "International"
+    end
   end
 end
