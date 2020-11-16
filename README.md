@@ -1,5 +1,3 @@
-# README
-
 [![Build Status](https://semaphoreci.com/api/v1/jennymalmefeldt/api_good_morning_news-04b3ec9f-8176-4340-9119-9728bc3a9a37/branches/development/badge.svg)](https://semaphoreci.com/jennymalmefeldt/api_good_morning_news-04b3ec9f-8176-4340-9119-9728bc3a9a37)
 
 This is the API to our project Good Morning News. 
